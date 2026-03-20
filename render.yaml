@@ -1,0 +1,23 @@
+# Render.yaml for Backend Deployment
+# Deploy to Render with Python/FastAPI
+
+envs:
+  - key: SUPABASE_URL
+    value: ${SUPABASE_URL}
+  - key: SUPABASE_ANON_KEY
+    value: ${SUPABASE_ANON_KEY}
+  - key: SUPABASE_SERVICE_ROLE_KEY
+    value: ${SUPABASE_SERVICE_ROLE_KEY}
+
+services:
+  - type: web
+    name: attendance-backend
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: DEBUG
+        value: false
